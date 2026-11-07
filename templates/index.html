@@ -1347,14 +1347,25 @@ body {
                         </div>
                         <div class="form-group">
                             <label class="form-label">Message Body:</label>
-                            <textarea id="waMessageText" class="form-textarea" rows="7" placeholder="Hello {Name},&#10;&#10;We are reaching out regarding our special service offer...&#10;&#10;Best regards,&#10;Our Company">Hello {Traveler Name}! ✈️
+                            <textarea id="waMessageText" class="form-textarea" rows="10" placeholder="Hello {Agency / Company Name} Team...">Hello {Agency / Company Name} Team,
 
-Your travel booking update for {Destination} ({Package}) on {Travel Date} is confirmed!
+I was reviewing your website ({Official Website URL}) and current travel services in {City} ({Primary Services})—your destinations and travel offers look excellent.
 
-Your booking status is: {Status}. Please let us know if you require airport transfer or travel assistance.
+My name is Muhammad Soban, and I lead RenZoify. We partner with leading travel agencies and tour operators to drive consistent bookings and inquiries through Daily Video Management (30 Promotional Video Ads & Short-Form Reels per month).
 
-Safe travels!
-Travel & Tours Team</textarea>
+We turn your flight deals, Umrah packages, and international holiday tours into cinematic vertical reels for Instagram, TikTok, and Facebook so prospective travelers reach out to your WhatsApp directly.
+
+I would love to create 1 complimentary sample video for one of your current holiday or Umrah packages so you can review our production quality firsthand.
+
+Would you be open to seeing a sample reel?
+
+Best regards,
+
+Muhammad Soban
+RenZoify
+WhatsApp: +92 314 3530776
+Email: soban9633@gmail.com
+Web Portfolio: https://renzoify.com | https://synvoice.io</textarea>
                             <small class="help-text">The live phone screen on the right shows how this message appears on mobile devices.</small>
                         </div>
                     </div>
@@ -1366,24 +1377,29 @@ Travel & Tours Team</textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Email Subject:</label>
-                            <input type="text" id="emailSubject" class="form-input" value="Travel Booking Update for {Traveler Name} - {Destination}">
+                            <input type="text" id="emailSubject" class="form-input" value="Complimentary Sample Video Reel for {Agency / Company Name} - RenZoify">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Email Body:</label>
-                            <textarea id="emailBody" class="form-textarea" rows="6" placeholder="Dear {Name},&#10;&#10;We are pleased to introduce...&#10;&#10;Best regards,&#10;Your Team">Dear {Traveler Name},
+                            <textarea id="emailBody" class="form-textarea" rows="10" placeholder="Assalam-o-Alaikum {Agency / Company Name} Team...">Assalam-o-Alaikum {Agency / Company Name} Team,
 
-We hope you are excited for your upcoming journey! Here are your travel booking details:
+I was reviewing your website ({Official Website URL}) and current travel services in {City} ({Primary Services})—your destinations and travel offers look excellent.
 
-- Traveler Name: {Traveler Name}
-- Destination: {Destination}
-- Departure Date: {Travel Date}
-- Selected Package: {Package}
-- Status: {Status}
+My name is Muhammad Soban, and I lead RenZoify. We partner with leading travel agencies and tour operators to drive consistent bookings and inquiries through Daily Video Management (30 Promotional Video Ads & Short-Form Reels per month).
 
-Please reply directly to this email if you need any ticket or visa adjustments.
+We turn your flight deals, Umrah packages, and international holiday tours into cinematic vertical reels for Instagram, TikTok, and Facebook so prospective travelers reach out to your WhatsApp directly.
 
-Wishing you safe travels!
-Travel Reservations Desk</textarea>
+I would love to create 1 complimentary sample video for one of your current holiday or Umrah packages so you can review our production quality firsthand.
+
+Would you be open to seeing a sample reel?
+
+Best regards,
+
+Muhammad Soban
+RenZoify
+WhatsApp: +92 314 3530776
+Email: soban9633@gmail.com
+Web Portfolio: https://renzoify.com | https://synvoice.io</textarea>
                         </div>
 
                         <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
@@ -1411,7 +1427,7 @@ Travel Reservations Desk</textarea>
                             <div class="phone-screen-header">
                                 <div class="phone-avatar">C</div>
                                 <div class="phone-contact-info">
-                                    <div class="phone-contact-name" id="mockupContactName">Muhammad Rizwan</div>
+                                    <div class="phone-contact-name" id="mockupContactName">Ajil Travel & Tourism</div>
                                     <div class="phone-contact-status">online</div>
                                 </div>
                                 <i class="fa-solid fa-video text-muted"></i>
@@ -1420,7 +1436,7 @@ Travel Reservations Desk</textarea>
 
                             <div class="phone-chat-body">
                                 <div class="wa-message-bubble">
-                                    <div id="mockupMessageText">Hello Muhammad Rizwan!
+                                    <div id="mockupMessageText">Hello Ajil Travel & Tourism!
 
 We hope you are having a wonderful day! We are reaching out regarding an exclusive update.</div>
                                     <div class="wa-bubble-footer">
@@ -1809,7 +1825,7 @@ function handleParsedData(data) {
     // Update Phone Mockup with First Contact Name
     if (data.preview && data.preview.length > 0 && data.detected.name) {
         const firstContact = data.preview[0];
-        const firstName = firstContact[data.detected.name] || 'Muhammad Rizwan';
+        const firstName = firstContact[data.detected.name] || 'Ajil Travel & Tourism';
         const mockupName = document.getElementById('mockupContactName');
         if (mockupName) mockupName.innerText = firstName;
         updateMockupText();
@@ -1922,7 +1938,7 @@ function updateMockupText() {
     const mockupBubble = document.getElementById('mockupMessageText');
     if (!waText || !mockupBubble) return;
 
-    let sampleName = 'Muhammad Rizwan';
+    let sampleName = 'Ajil Travel & Tourism';
     if (samplePreviewRows && samplePreviewRows.length > 0) {
         const nameCol = document.getElementById('mapName')?.value;
         if (nameCol && samplePreviewRows[0][nameCol]) {
