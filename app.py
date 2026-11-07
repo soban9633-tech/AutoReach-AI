@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 
 import excel_processor
 import email_bot
+import gemini_writer
 from whatsapp_bot import WhatsAppBot
 
 app = Flask(__name__)
@@ -226,6 +227,40 @@ def test_email():
     )
     return jsonify({'success': success, 'message': msg})
 
+@app.route('/api/gemini/test', methods=['POST'])
+def test_gemini():
+    payload = request.get_json() or {}
+    api_key = payload.get('api_key', '')
+    success, msg = gemini_writer.test_gemini_connection(api_key)
+    return jsonify({'success': success, 'message': msg})
+
+@app.route('/api/gemini/generate-sample', methods=['POST'])
+def generate_gemini_sample():
+    payload = request.get_json() or {}
+    api_key = payload.get('api_key', '')
+    sender_offer = payload.get('sender_offer', '')
+    channel = payload.get('channel', 'whatsapp')
+    
+    if not api_key:
+        return jsonify({'success': False, 'error': 'Gemini API Key is required'}), 400
+
+    row = {}
+    if loaded_dataset['rows']:
+        row = loaded_dataset['rows'][0]
+    else:
+        row = {
+            'Agency / Company Name': 'Ajil Travel & Tourism (عاجل للسفر والسياحة)',
+            'City': 'Riyadh',
+            'Primary Services': 'International Tour Packages, Flight Bookings & Luxury Hotels',
+            'Official Website URL': 'ajil-sa.com'
+        }
+
+    try:
+        result = gemini_writer.generate_personalized_pitch(api_key, row, sender_offer, channel)
+        return jsonify({'success': True, 'result': result, 'contact': row})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 400
+
 def campaign_worker(options):
     global campaign_state, whatsapp_instance
     rows = loaded_dataset['rows']
@@ -253,6 +288,13 @@ def campaign_worker(options):
     phone_col = col_map.get('phone')
     email_col = col_map.get('email')
     name_col = col_map.get('name')
+
+    use_gemini = bool(options.get('use_gemini', False))
+    gemini_api_key = str(options.get('gemini_api_key', '')).strip()
+    sender_offer = str(options.get('sender_offer', '')).strip()
+
+    if use_gemini and gemini_api_key:
+        add_log("✨ Gemini AI Personalization Engine: ACTIVATED (Custom message per business).", "success")
 
     results = {}
 
@@ -296,7 +338,19 @@ def campaign_worker(options):
                 add_log(f"[{name}] WhatsApp Skipped: Invalid phone '{raw_phone}'", "error")
                 contact_success = False
             else:
-                wa_msg = excel_processor.format_message(wa_template, contact)
+                wa_msg = ""
+                if use_gemini and gemini_api_key:
+                    try:
+                        add_log(f"[{name}] ✨ Gemini AI generating tailored pitch...", "info")
+                        wa_msg = gemini_writer.generate_personalized_pitch(
+                            gemini_api_key, contact, sender_offer, channel="whatsapp"
+                        )
+                    except Exception as ex:
+                        add_log(f"[{name}] Gemini fallback: {str(ex)}", "warning")
+                        wa_msg = excel_processor.format_message(wa_template, contact)
+                else:
+                    wa_msg = excel_processor.format_message(wa_template, contact)
+
                 add_log(f"[{name}] Sending WhatsApp to +{cleaned_phone} [{country_name}]...", "info")
                 ok, note = whatsapp_instance.send_message(cleaned_phone, wa_msg)
                 if ok:
@@ -318,8 +372,22 @@ def campaign_worker(options):
                 add_log(f"[{name}] Email Skipped: Invalid email '{recipient_email}'", "error")
                 contact_success = False
             else:
-                subject = excel_processor.format_message(email_cfg.get('subject', ''), contact)
-                body = excel_processor.format_message(email_cfg.get('body', ''), contact)
+                subject = ""
+                body = ""
+                if use_gemini and gemini_api_key:
+                    try:
+                        em_data = gemini_writer.generate_personalized_pitch(
+                            gemini_api_key, contact, sender_offer, channel="email"
+                        )
+                        subject = em_data.get('subject') or excel_processor.format_message(email_cfg.get('subject', ''), contact)
+                        body = em_data.get('body') or excel_processor.format_message(email_cfg.get('body', ''), contact)
+                    except Exception:
+                        subject = excel_processor.format_message(email_cfg.get('subject', ''), contact)
+                        body = excel_processor.format_message(email_cfg.get('body', ''), contact)
+                else:
+                    subject = excel_processor.format_message(email_cfg.get('subject', ''), contact)
+                    body = excel_processor.format_message(email_cfg.get('body', ''), contact)
+
                 add_log(f"[{name}] Sending Email to {recipient_email}...", "info")
                 
                 ok, note = email_bot.send_email(
