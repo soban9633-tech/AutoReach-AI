@@ -5,7 +5,1085 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AutoReach AI - Turn Your Excel Sheets into Automated WhatsApp & Email Campaigns Instantly</title>
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="/static/style.css">
+    <style>
+/* ==========================================================================
+   AutoReach AI - Ultra-Premium SaaS Stylesheet
+   Modern Glassmorphic Dark Architecture with Vibrant Accents
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap');
+
+:root {
+    /* Color Palette */
+    --bg-black: #060911;
+    --bg-dark: #0a0f1d;
+    --bg-card: #10172a;
+    --bg-card-hover: #151f38;
+    --bg-card-glass: rgba(16, 23, 42, 0.85);
+    --bg-input: #0a0f1d;
+    
+    --border-subtle: rgba(255, 255, 255, 0.07);
+    --border-card: #1e293b;
+    --border-focus: #6366f1;
+
+    --text-pure: #ffffff;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    /* Accents */
+    --accent: #6366f1;
+    --accent-hover: #4f46e5;
+    --accent-glow: rgba(99, 102, 241, 0.35);
+    --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+    
+    --wa-green: #25d366;
+    --wa-green-glow: rgba(37, 211, 102, 0.3);
+    --wa-gradient: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    
+    --email-blue: #38bdf8;
+    --email-glow: rgba(56, 189, 248, 0.3);
+    
+    --success: #10b981;
+    --success-bg: rgba(16, 185, 129, 0.12);
+    --danger: #ef4444;
+    --danger-bg: rgba(239, 68, 68, 0.12);
+    --warning: #f59e0b;
+    --warning-bg: rgba(245, 158, 11, 0.12);
+    --info: #06b6d4;
+
+    /* Typography */
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-code: 'JetBrains Mono', monospace;
+    --font-urdu: 'Noto Nastaliq Urdu', serif;
+
+    /* Radius & Shadows */
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-full: 9999px;
+    
+    --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border-card);
+    --shadow-glow: 0 0 35px -5px var(--accent-glow);
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+}
+
+body {
+    background-color: var(--bg-black);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    line-height: 1.6;
+}
+
+/* Ambient Background Lights */
+.bg-ambient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.ambient-light-1 {
+    position: absolute;
+    top: -15%;
+    left: 10%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0) 70%);
+    filter: blur(80px);
+}
+
+.ambient-light-2 {
+    position: absolute;
+    top: 30%;
+    right: -10%;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(37, 211, 102, 0.12) 0%, rgba(37, 211, 102, 0) 70%);
+    filter: blur(100px);
+}
+
+.ambient-light-3 {
+    position: absolute;
+    bottom: -10%;
+    left: 30%;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, rgba(236, 72, 153, 0) 70%);
+    filter: blur(80px);
+}
+
+/* Main Layout */
+.app-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+/* Top Navigation Bar */
+.top-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-card-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-card);
+    padding: 14px 24px;
+    border-radius: var(--radius-md);
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-card);
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+}
+
+.brand-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.brand-icon-box {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    background: var(--accent-gradient);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: white;
+    box-shadow: 0 6px 20px var(--accent-glow);
+}
+
+.brand-icon-box::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 14px;
+    background: var(--accent-gradient);
+    z-index: -1;
+    opacity: 0.6;
+    filter: blur(6px);
+}
+
+.brand-text h1 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.brand-text h1 .version-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    background: rgba(99, 102, 241, 0.2);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    border-radius: var(--radius-full);
+    color: #a5b4fc;
+    letter-spacing: 0.5px;
+}
+
+.brand-urdu-tag {
+    font-family: var(--font-urdu);
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.2;
+}
+
+/* Nav Status Badges */
+.nav-indicators {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 14px;
+    border-radius: var(--radius-full);
+    font-size: 13px;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    transition: all 0.25s ease;
+}
+
+.status-badge .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    transition: all 0.25s ease;
+}
+
+.status-badge.connected {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: var(--success);
+}
+
+.status-badge.connected .dot {
+    background: var(--success);
+    box-shadow: 0 0 10px var(--success);
+    animation: pulse 2s infinite;
+}
+
+.status-badge.wa-badge.connected {
+    background: rgba(37, 211, 102, 0.1);
+    border-color: rgba(37, 211, 102, 0.3);
+    color: var(--wa-green);
+}
+
+.status-badge.wa-badge.connected .dot {
+    background: var(--wa-green);
+    box-shadow: 0 0 10px var(--wa-green);
+}
+
+.contacts-counter-badge {
+    background: rgba(99, 102, 241, 0.12);
+    border-color: rgba(99, 102, 241, 0.3);
+    color: #c7d2fe;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.7; }
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    padding: 30px 20px 45px 20px;
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 18px;
+    border-radius: var(--radius-full);
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: #a5b4fc;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.15);
+}
+
+.hero-pill .pulse-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #a5b4fc;
+    box-shadow: 0 0 8px #a5b4fc;
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: 46px;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -1.2px;
+    color: var(--text-pure);
+    margin-bottom: 20px;
+}
+
+.gradient-text {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.hero-lead {
+    font-size: 17px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.hero-urdu-box {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 10px 22px;
+    font-family: var(--font-urdu);
+    font-size: 15px;
+    color: #e2e8f0;
+    margin-bottom: 28px;
+    direction: rtl;
+}
+
+/* Feature Highlights Bar */
+.features-bar {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.feature-pill-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(16, 23, 42, 0.6);
+    border: 1px solid var(--border-card);
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.feature-pill-item i {
+    color: var(--email-blue);
+}
+
+/* Workflow Step Tabs */
+.workflow-nav-wrapper {
+    margin-bottom: 28px;
+}
+
+.workflow-tabs {
+    display: flex;
+    gap: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    padding: 8px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    overflow-x: auto;
+}
+
+.tab-trigger {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 20px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.tab-trigger:hover {
+    color: var(--text-pure);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.tab-trigger.active {
+    background: var(--accent);
+    color: var(--text-pure);
+    box-shadow: 0 4px 20px var(--accent-glow);
+}
+
+.tab-step-badge {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+/* Cards & Layout */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: slideUpFade 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 24px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.pro-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+}
+
+.pro-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.pro-card-header h3 {
+    font-family: var(--font-heading);
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text-pure);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.card-subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 22px;
+    line-height: 1.5;
+}
+
+/* Drag & Drop Zone */
+.dropzone-container {
+    border: 2px dashed rgba(99, 102, 241, 0.4);
+    border-radius: var(--radius-md);
+    padding: 45px 25px;
+    text-align: center;
+    background: radial-gradient(circle at center, rgba(99, 102, 241, 0.05) 0%, rgba(10, 15, 29, 0.4) 100%);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    position: relative;
+}
+
+.dropzone-container:hover, .dropzone-container.dragover {
+    border-color: var(--accent);
+    background: rgba(99, 102, 241, 0.1);
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+    transform: translateY(-2px);
+}
+
+.drop-icon-wrapper {
+    width: 64px;
+    height: 64px;
+    background: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #a5b4fc;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.drop-headline {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-pure);
+    margin-bottom: 6px;
+}
+
+.drop-subtext {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.btn-file-select {
+    padding: 12px 28px;
+    font-size: 15px;
+    font-weight: 700;
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 6px 20px var(--accent-glow);
+    transition: all 0.25s ease;
+}
+
+.btn-file-select:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px var(--accent-glow);
+}
+
+.file-type-tags {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.tag-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    color: var(--text-muted);
+}
+
+/* File Loaded Banner */
+.file-loaded-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--success-bg);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    padding: 14px 20px;
+    border-radius: var(--radius-sm);
+    margin-top: 18px;
+}
+
+.file-loaded-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.file-loaded-info i {
+    font-size: 20px;
+    color: var(--success);
+}
+
+/* Form Controls */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.form-select, .form-input, .form-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-sm);
+    color: var(--text-pure);
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.form-select:focus, .form-input:focus, .form-textarea:focus {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.form-textarea {
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.help-text {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    display: block;
+}
+
+/* Dynamic Variable Tags Bar */
+.variables-ribbon {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-md);
+    padding: 14px 20px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    box-shadow: var(--shadow-card);
+}
+
+.ribbon-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--email-blue);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tags-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.var-tag-btn {
+    background: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    color: #c7d2fe;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.var-tag-btn:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+/* WhatsApp Phone Mockup Preview */
+.phone-mockup-wrapper {
+    background: #0f1626;
+    border: 2px solid #22324f;
+    border-radius: 36px;
+    padding: 12px;
+    max-width: 380px;
+    margin: 0 auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.phone-screen {
+    background: #0b141a;
+    border-radius: 26px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 480px;
+    position: relative;
+}
+
+.phone-screen-header {
+    background: #202c33;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.phone-avatar {
+    width: 36px;
+    height: 36px;
+    background: var(--wa-green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.phone-contact-info {
+    flex: 1;
+}
+
+.phone-contact-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e9edef;
+}
+
+.phone-contact-status {
+    font-size: 11px;
+    color: var(--wa-green);
+}
+
+.phone-chat-body {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    background: #0b141a url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" opacity="0.03"><rect width="60" height="60" fill="none"/><circle cx="30" cy="30" r="10" fill="white"/></svg>') repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.wa-message-bubble {
+    align-self: flex-end;
+    background: #005c4b;
+    color: #e9edef;
+    padding: 10px 14px;
+    border-radius: 12px 12px 2px 12px;
+    max-width: 88%;
+    font-size: 13.5px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.wa-bubble-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 4px;
+}
+
+.wa-bubble-footer i {
+    color: #53bdeb;
+}
+
+/* Table Preview */
+.pro-table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-card);
+}
+
+.pro-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    text-align: left;
+}
+
+.pro-table th {
+    background: #0b1120;
+    padding: 14px 18px;
+    color: var(--text-secondary);
+    font-weight: 700;
+    border-bottom: 2px solid var(--border-card);
+    letter-spacing: 0.5px;
+}
+
+.pro-table td {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+}
+
+.pro-table tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Control Launch Banner */
+.launch-banner {
+    background: radial-gradient(circle at 10% 20%, #1e1b4b 0%, #0d1527 90%);
+    border: 1px solid #3730a3;
+    border-radius: var(--radius-lg);
+    padding: 36px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(99, 102, 241, 0.15);
+    margin-bottom: 28px;
+}
+
+.launch-banner-text h2 {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text-pure);
+    margin-bottom: 8px;
+}
+
+.launch-banner-text p {
+    color: #c7d2fe;
+    font-size: 15px;
+}
+
+.launch-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn-pro {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 22px;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+}
+
+.btn-pro-primary {
+    background: var(--accent-gradient);
+    color: white;
+    box-shadow: 0 4px 20px var(--accent-glow);
+}
+
+.btn-pro-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px var(--accent-glow);
+}
+
+.btn-pro-wa {
+    background: var(--wa-gradient);
+    color: white;
+    box-shadow: 0 4px 20px var(--wa-green-glow);
+}
+
+.btn-pro-wa:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px var(--wa-green-glow);
+}
+
+.btn-pro-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.btn-pro-outline {
+    background: transparent;
+    border: 1px solid var(--border-card);
+    color: var(--text-primary);
+}
+
+.btn-pro-outline:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-pro-lg {
+    padding: 16px 32px;
+    font-size: 16px;
+    border-radius: var(--radius-md);
+}
+
+.btn-pro:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Live Metrics Grid */
+.metrics-hub {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.metric-box {
+    background: #0a0f1d;
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.metric-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--border-card);
+}
+
+.metric-box.metric-sent::before { background: var(--success); }
+.metric-box.metric-failed::before { background: var(--danger); }
+.metric-box.metric-remaining::before { background: var(--email-blue); }
+
+.metric-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+}
+
+.metric-number {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-weight: 800;
+}
+
+/* Progress Bar */
+.pro-progress-container {
+    margin-top: 10px;
+}
+
+.pro-progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.progress-active-target {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--email-blue);
+}
+
+.progress-pct {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--accent);
+}
+
+.pro-progress-track {
+    width: 100%;
+    height: 12px;
+    background: #080d1a;
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    border: 1px solid var(--border-card);
+}
+
+.pro-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6366f1, #25d366);
+    border-radius: var(--radius-full);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Terminal Console */
+.terminal-card {
+    background: #050811;
+    border: 1px solid #172338;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.terminal-header {
+    background: #0a0f1d;
+    padding: 12px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #172338;
+}
+
+.terminal-title {
+    font-family: var(--font-code);
+    font-size: 13px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.terminal-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.terminal-dots .dot-r { background: #ef4444; }
+.terminal-dots .dot-y { background: #f59e0b; }
+.terminal-dots .dot-g { background: #10b981; }
+
+.terminal-body {
+    height: 300px;
+    overflow-y: auto;
+    padding: 16px;
+    font-family: var(--font-code);
+    font-size: 13px;
+    line-height: 1.7;
+    background: #050811;
+}
+
+.t-line {
+    margin-bottom: 6px;
+    display: flex;
+    gap: 10px;
+}
+
+.t-time { color: var(--text-muted); }
+.t-msg-info { color: #94a3b8; }
+.t-msg-success { color: #34d399; font-weight: 600; }
+.t-msg-error { color: #f87171; font-weight: 600; }
+.t-msg-warning { color: #fbbf24; }
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .hero-title { font-size: 32px; }
+    .metrics-hub { grid-template-columns: repeat(2, 1fr); }
+    .top-navbar { flex-direction: column; gap: 16px; align-items: flex-start; }
+    .nav-indicators { width: 100%; justify-content: space-between; }
+}
+
+</style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
@@ -535,6 +1613,624 @@ Umeed hai aap theek hongey. Ye aik automated personalized message hai.</div>
     </div>
 
     <!-- Scripts -->
-    <script src="/static/app.js"></script>
+    <script>
+let campaignPollInterval = null;
+let lastFocusedTextarea = null;
+let currentColumns = [];
+let samplePreviewRows = [];
+
+document.addEventListener('DOMContentLoaded', () => {
+    initTabs();
+    initFileUpload();
+    initVariableTags();
+    initEmailConfig();
+    initWhatsAppActions();
+    initCampaignControls();
+    initPhoneMockupSync();
+
+    // Check status initially
+    checkWhatsAppStatus();
+});
+
+// 1. TABS NAVIGATION
+function initTabs() {
+    const tabBtns = document.querySelectorAll('.tab-trigger');
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetId = btn.getAttribute('data-tab');
+            switchTab(targetId);
+        });
+    });
+}
+
+function switchTab(targetId) {
+    document.querySelectorAll('.tab-trigger').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+    const activeBtn = document.querySelector(`.tab-trigger[data-tab="${targetId}"]`);
+    const activeContent = document.getElementById(targetId);
+
+    if (activeBtn && activeContent) {
+        activeBtn.classList.add('active');
+        activeContent.classList.add('active');
+    }
+}
+
+// 2. FILE UPLOAD & PREVIEW
+function initFileUpload() {
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const btnLoadSample = document.getElementById('btnLoadSample');
+
+    if (dropZone) {
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                dropZone.classList.add('dragover');
+            });
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                dropZone.classList.remove('dragover');
+            });
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                uploadFile(files[0]);
+            }
+        });
+    }
+
+    if (fileInput) {
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                uploadFile(e.target.files[0]);
+            }
+        });
+    }
+
+    if (btnLoadSample) {
+        btnLoadSample.addEventListener('click', () => {
+            fetch('/api/load-sample')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        handleParsedData(data);
+                    } else {
+                        alert('Error loading sample: ' + data.error);
+                    }
+                })
+                .catch(err => alert('Network error: ' + err));
+        });
+    }
+}
+
+function uploadFile(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const headline = document.querySelector('.drop-headline');
+    const originalText = headline ? headline.innerText : 'Drag & Drop your Excel file here';
+    if (headline) {
+        headline.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-accent"></i> Processing ${file.name}...`;
+    }
+
+    fetch('/api/upload', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (headline) headline.innerText = originalText;
+        if (data.success) {
+            handleParsedData(data);
+        } else {
+            alert('Upload error: ' + (data.error || 'Failed to read spreadsheet'));
+        }
+    })
+    .catch(err => {
+        if (headline) headline.innerText = originalText;
+        alert('Upload failed: ' + err);
+    });
+}
+
+function handleParsedData(data) {
+    currentColumns = data.columns || [];
+    samplePreviewRows = data.preview || [];
+
+    // Update Badges & Counters
+    const infoBadge = document.getElementById('fileInfoBadge');
+    if (infoBadge) infoBadge.classList.remove('hidden');
+
+    const fileNameEl = document.getElementById('loadedFileName');
+    if (fileNameEl) fileNameEl.innerText = data.filename;
+
+    const rowCountEl = document.getElementById('loadedRowCount');
+    if (rowCountEl) rowCountEl.innerText = `${data.total_rows} Contacts`;
+
+    const previewBadge = document.getElementById('previewTotalBadge');
+    if (previewBadge) previewBadge.innerText = `${data.total_rows} Leads Loaded`;
+
+    const totalContactsBadge = document.getElementById('totalContactsBadge');
+    if (totalContactsBadge) totalContactsBadge.innerText = data.total_rows;
+
+    const metricTotal = document.getElementById('metricTotal');
+    if (metricTotal) metricTotal.innerText = data.total_rows;
+
+    const metricRem = document.getElementById('metricRemaining');
+    if (metricRem) metricRem.innerText = data.total_rows;
+
+    // Populate Column Selects
+    populateSelect('mapPhone', currentColumns, data.detected.phone);
+    populateSelect('mapEmail', currentColumns, data.detected.email);
+    populateSelect('mapName', currentColumns, data.detected.name);
+
+    // Render Preview Table
+    renderTablePreview(currentColumns, data.preview);
+
+    // Refresh Dynamic Tags in Tab 2
+    renderDynamicTags(currentColumns);
+
+    // Update Phone Mockup with First Contact Name
+    if (data.preview && data.preview.length > 0 && data.detected.name) {
+        const firstContact = data.preview[0];
+        const firstName = firstContact[data.detected.name] || 'Ali Khan';
+        const mockupName = document.getElementById('mockupContactName');
+        if (mockupName) mockupName.innerText = firstName;
+        updateMockupText();
+    }
+}
+
+function populateSelect(selectId, columns, selectedValue) {
+    const select = document.getElementById(selectId);
+    if (!select) return;
+
+    select.innerHTML = '<option value="">-- Do Not Send / Not Mapped --</option>';
+    columns.forEach(col => {
+        const opt = document.createElement('option');
+        opt.value = col;
+        opt.textContent = col;
+        if (col === selectedValue) {
+            opt.selected = true;
+        }
+        select.appendChild(opt);
+    });
+}
+
+function renderTablePreview(columns, previewRows) {
+    const table = document.getElementById('previewTable');
+    if (!table || !columns || columns.length === 0) return;
+
+    let theadHtml = '<tr><th>#</th>';
+    columns.forEach(c => theadHtml += `<th>${escapeHtml(c)}</th>`);
+    theadHtml += '</tr>';
+
+    let tbodyHtml = '';
+    previewRows.forEach((row, i) => {
+        tbodyHtml += `<tr><td><strong>${i + 1}</strong></td>`;
+        columns.forEach(col => {
+            tbodyHtml += `<td>${escapeHtml(row[col] || '')}</td>`;
+        });
+        tbodyHtml += '</tr>';
+    });
+
+    table.innerHTML = `<thead>${theadHtml}</thead><tbody>${tbodyHtml}</tbody>`;
+}
+
+// 3. DYNAMIC VARIABLE TAGS & PHONE MOCKUP SYNC
+function initVariableTags() {
+    const waText = document.getElementById('waMessageText');
+    const emBody = document.getElementById('emailBody');
+    const emSubj = document.getElementById('emailSubject');
+
+    [waText, emBody, emSubj].forEach(elem => {
+        if (elem) {
+            elem.addEventListener('focus', () => {
+                lastFocusedTextarea = elem;
+            });
+        }
+    });
+
+    bindVariablePills();
+}
+
+function renderDynamicTags(columns) {
+    const container = document.getElementById('variablesTags');
+    if (!container) return;
+
+    container.innerHTML = '';
+    columns.forEach(col => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'var-tag-btn';
+        btn.setAttribute('data-var', `{${col}}`);
+        btn.textContent = `+ {${col}}`;
+        container.appendChild(btn);
+    });
+    bindVariablePills();
+}
+
+function bindVariablePills() {
+    document.querySelectorAll('.var-tag-btn').forEach(pill => {
+        pill.onclick = () => {
+            const tag = pill.getAttribute('data-var');
+            insertTagAtCursor(tag);
+        };
+    });
+}
+
+function insertTagAtCursor(tag) {
+    const target = lastFocusedTextarea || document.getElementById('waMessageText');
+    if (!target) return;
+
+    const startPos = target.selectionStart || 0;
+    const endPos = target.selectionEnd || 0;
+    const text = target.value;
+
+    target.value = text.substring(0, startPos) + tag + text.substring(endPos);
+    target.focus();
+    target.selectionStart = target.selectionEnd = startPos + tag.length;
+
+    updateMockupText();
+}
+
+function initPhoneMockupSync() {
+    const waText = document.getElementById('waMessageText');
+    if (waText) {
+        waText.addEventListener('input', updateMockupText);
+        updateMockupText();
+    }
+}
+
+function updateMockupText() {
+    const waText = document.getElementById('waMessageText');
+    const mockupBubble = document.getElementById('mockupMessageText');
+    if (!waText || !mockupBubble) return;
+
+    let sampleName = 'Ali Khan';
+    if (samplePreviewRows && samplePreviewRows.length > 0) {
+        const nameCol = document.getElementById('mapName')?.value;
+        if (nameCol && samplePreviewRows[0][nameCol]) {
+            sampleName = samplePreviewRows[0][nameCol];
+        }
+    }
+
+    let rendered = waText.value || '';
+    rendered = rendered.replace(/{Name}/gi, sampleName);
+    rendered = rendered.replace(/{Phone}/gi, '+92 300 1234567');
+    rendered = rendered.replace(/{Email}/gi, 'client@example.com');
+    rendered = rendered.replace(/{Company}/gi, 'Tech Solutions');
+
+    mockupBubble.innerText = rendered || 'Type a message in the box to preview...';
+}
+
+// 4. EMAIL CONFIGURATION
+function initEmailConfig() {
+    const providerSelect = document.getElementById('emailProvider');
+    const customFields = document.getElementById('customSmtpFields');
+    const btnTest = document.getElementById('btnTestEmail');
+    const testResult = document.getElementById('testEmailResult');
+
+    if (providerSelect) {
+        providerSelect.addEventListener('change', () => {
+            if (providerSelect.value === 'custom') {
+                customFields?.classList.remove('hidden');
+            } else {
+                customFields?.classList.add('hidden');
+            }
+        });
+    }
+
+    if (btnTest) {
+        btnTest.addEventListener('click', () => {
+            const email = document.getElementById('senderEmail')?.value.trim();
+            const pwd = document.getElementById('senderPassword')?.value.trim();
+            if (!email || !pwd) {
+                alert('Please enter your Sender Email and App Password first');
+                return;
+            }
+
+            testResult.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-accent"></i> Connecting to SMTP server...';
+
+            fetch('/api/test-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    provider: providerSelect.value,
+                    sender_email: email,
+                    password: pwd,
+                    custom_host: document.getElementById('customHost')?.value || '',
+                    custom_port: document.getElementById('customPort')?.value || 587
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    testResult.innerHTML = `<span class="text-success"><i class="fa-solid fa-circle-check"></i> ${data.message}</span>`;
+                    document.getElementById('emailStatusPill')?.classList.add('connected');
+                    const textEl = document.getElementById('emailStatusText');
+                    if (textEl) textEl.innerText = 'SMTP: Verified';
+                } else {
+                    testResult.innerHTML = `<span class="text-danger"><i class="fa-solid fa-circle-xmark"></i> ${data.message}</span>`;
+                }
+            })
+            .catch(err => {
+                testResult.innerHTML = `<span class="text-danger">Network error: ${err}</span>`;
+            });
+        });
+    }
+}
+
+// 5. WHATSAPP ACTIONS
+function initWhatsAppActions() {
+    const btnLaunch = document.getElementById('btnLaunchWhatsApp');
+    const btnCheck = document.getElementById('btnCheckWhatsAppStatus');
+    const waDetail = document.getElementById('waDetailedStatus');
+
+    if (btnLaunch) {
+        btnLaunch.addEventListener('click', () => {
+            waDetail.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-accent"></i> Opening Google Chrome for WhatsApp Web...';
+            fetch('/api/whatsapp/launch', { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        if (data.logged_in) {
+                            setWhatsAppConnectedUI();
+                        } else {
+                            waDetail.innerHTML = '<span class="text-warning"><i class="fa-solid fa-qrcode"></i> Chrome is open! Scan the QR code in Chrome with your phone.</span>';
+                            startPollingWhatsAppStatus();
+                        }
+                    } else {
+                        waDetail.innerHTML = `<span class="text-danger">Error: ${data.error}</span>`;
+                    }
+                })
+                .catch(err => waDetail.innerHTML = `<span class="text-danger">Launch error: ${err}</span>`);
+        });
+    }
+
+    if (btnCheck) {
+        btnCheck.addEventListener('click', checkWhatsAppStatus);
+    }
+}
+
+function checkWhatsAppStatus() {
+    fetch('/api/whatsapp/status')
+        .then(res => res.json())
+        .then(data => {
+            if (data.logged_in) {
+                setWhatsAppConnectedUI();
+            } else if (data.running) {
+                const waDetail = document.getElementById('waDetailedStatus');
+                if (waDetail) {
+                    waDetail.innerHTML = '<span class="text-warning"><i class="fa-solid fa-qrcode"></i> Chrome is open. Please scan QR code.</span>';
+                }
+            }
+        })
+        .catch(() => {});
+}
+
+function setWhatsAppConnectedUI() {
+    const waDetail = document.getElementById('waDetailedStatus');
+    if (waDetail) {
+        waDetail.innerHTML = '<span class="text-success"><i class="fa-solid fa-circle-check"></i> WhatsApp Web is Connected & Ready!</span>';
+    }
+    const pill = document.getElementById('waStatusPill');
+    if (pill) pill.classList.add('connected');
+    const text = document.getElementById('waStatusText');
+    if (text) text.innerText = 'WhatsApp: Online';
+}
+
+function startPollingWhatsAppStatus() {
+    const interval = setInterval(() => {
+        fetch('/api/whatsapp/status')
+            .then(res => res.json())
+            .then(data => {
+                if (data.logged_in) {
+                    clearInterval(interval);
+                    setWhatsAppConnectedUI();
+                }
+            })
+            .catch(() => {});
+    }, 4000);
+}
+
+// 6. CAMPAIGN CONTROLS & REAL-TIME LOGS
+function initCampaignControls() {
+    const btnStart = document.getElementById('btnStartCampaign');
+    const btnStop = document.getElementById('btnStopCampaign');
+    const btnClearLogs = document.getElementById('btnClearLogs');
+
+    if (btnStart) {
+        btnStart.addEventListener('click', () => {
+            const channels = [];
+            if (document.getElementById('chkWhatsApp')?.checked) channels.push('whatsapp');
+            if (document.getElementById('chkEmail')?.checked) channels.push('email');
+
+            if (channels.length === 0) {
+                alert('Please select at least one outreach channel (WhatsApp or Email)');
+                return;
+            }
+
+            const phoneCol = document.getElementById('mapPhone')?.value;
+            const emailCol = document.getElementById('mapEmail')?.value;
+            const nameCol = document.getElementById('mapName')?.value;
+
+            if (channels.includes('whatsapp') && !phoneCol) {
+                alert('Please map the WhatsApp Phone Number column in Step 1');
+                switchTab('tab-upload');
+                return;
+            }
+
+            if (channels.includes('email')) {
+                if (!emailCol) {
+                    alert('Please map the Email column in Step 1');
+                    switchTab('tab-upload');
+                    return;
+                }
+                const senderEmail = document.getElementById('senderEmail')?.value.trim();
+                const senderPassword = document.getElementById('senderPassword')?.value.trim();
+                if (!senderEmail || !senderPassword) {
+                    alert('Please configure your Sender Email and App Password in Step 3');
+                    switchTab('tab-config');
+                    return;
+                }
+            }
+
+            const payload = {
+                channels: channels,
+                column_mapping: {
+                    phone: phoneCol,
+                    email: emailCol,
+                    name: nameCol
+                },
+                whatsapp_template: document.getElementById('waMessageText')?.value || '',
+                email_config: {
+                    provider: document.getElementById('emailProvider')?.value || 'gmail',
+                    sender_email: document.getElementById('senderEmail')?.value.trim() || '',
+                    password: document.getElementById('senderPassword')?.value.trim() || '',
+                    subject: document.getElementById('emailSubject')?.value || '',
+                    body: document.getElementById('emailBody')?.value || '',
+                    custom_host: document.getElementById('customHost')?.value || '',
+                    custom_port: document.getElementById('customPort')?.value || 587,
+                    is_html: false
+                },
+                default_country: document.getElementById('countryModeSelect')?.value || 'AUTO',
+                min_delay: parseInt(document.getElementById('minDelay')?.value) || 6,
+                max_delay: parseInt(document.getElementById('maxDelay')?.value) || 12
+            };
+
+            btnStart.disabled = true;
+            if (btnStop) btnStop.disabled = false;
+
+            fetch('/api/start-campaign', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    switchTab('tab-campaign');
+                    startProgressPolling();
+                } else {
+                    alert('Error starting campaign: ' + data.error);
+                    btnStart.disabled = false;
+                    if (btnStop) btnStop.disabled = true;
+                }
+            })
+            .catch(err => {
+                alert('Failed to start campaign: ' + err);
+                btnStart.disabled = false;
+                if (btnStop) btnStop.disabled = true;
+            });
+        });
+    }
+
+    if (btnStop) {
+        btnStop.addEventListener('click', () => {
+            fetch('/api/stop-campaign', { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    alert(data.message);
+                    btnStop.disabled = true;
+                });
+        });
+    }
+
+    if (btnClearLogs) {
+        btnClearLogs.addEventListener('click', () => {
+            const terminal = document.getElementById('terminalLogs');
+            if (terminal) terminal.innerHTML = '';
+        });
+    }
+}
+
+function startProgressPolling() {
+    if (campaignPollInterval) clearInterval(campaignPollInterval);
+
+    campaignPollInterval = setInterval(() => {
+        fetch('/api/campaign-status')
+            .then(res => res.json())
+            .then(state => {
+                updateCampaignUI(state);
+                if (!state.running && state.completed) {
+                    clearInterval(campaignPollInterval);
+                    const btnStart = document.getElementById('btnStartCampaign');
+                    const btnStop = document.getElementById('btnStopCampaign');
+                    if (btnStart) btnStart.disabled = false;
+                    if (btnStop) btnStop.disabled = true;
+                    if (state.has_report) {
+                        const reportBtn = document.getElementById('btnDownloadReport');
+                        if (reportBtn) reportBtn.style.display = 'inline-flex';
+                    }
+                }
+            })
+            .catch(() => {});
+    }, 1500);
+}
+
+function updateCampaignUI(state) {
+    const total = state.total || 0;
+    const current = state.current_index || 0;
+    const sent = state.sent_count || 0;
+    const failed = state.failed_count || 0;
+    const remaining = Math.max(0, total - (sent + failed));
+    const percent = total > 0 ? Math.round((current / total) * 100) : 0;
+
+    const fill = document.getElementById('progressBarFill');
+    if (fill) fill.style.width = `${percent}%`;
+
+    const pctEl = document.getElementById('progressPercent');
+    if (pctEl) pctEl.innerText = `${percent}%`;
+
+    const targetEl = document.getElementById('currentTargetText');
+    if (targetEl) {
+        targetEl.innerText = state.current_name ? `Sending to: ${state.current_name} (${current}/${total})` : (state.running ? 'Starting...' : 'Completed');
+    }
+
+    const mTotal = document.getElementById('metricTotal');
+    if (mTotal) mTotal.innerText = total;
+
+    const mSent = document.getElementById('metricSent');
+    if (mSent) mSent.innerText = sent;
+
+    const mFailed = document.getElementById('metricFailed');
+    if (mFailed) mFailed.innerText = failed;
+
+    const mRemaining = document.getElementById('metricRemaining');
+    if (mRemaining) mRemaining.innerText = remaining;
+
+    // Stream logs
+    if (state.logs && state.logs.length > 0) {
+        const terminal = document.getElementById('terminalLogs');
+        if (terminal) {
+            let html = '';
+            state.logs.forEach(log => {
+                const levelClass = `t-msg-${log.level || 'info'}`;
+                html += `<div class="t-line"><span class="t-time">[${log.time}]</span> <span class="${levelClass}">${escapeHtml(log.message)}</span></div>`;
+            });
+            terminal.innerHTML = html;
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+    }
+}
+
+function escapeHtml(text) {
+    if (!text) return '';
+    return text.toString()
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
+</script>
 </body>
 </html>
