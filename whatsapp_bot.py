@@ -44,6 +44,15 @@ class WhatsAppBot:
         # Keep window open
         options.add_experimental_option("detach", True)
 
+        # Remove stale lock if Chrome crashed earlier
+        for lock_name in ['SingletonLock', 'lockfile']:
+            lf = os.path.join(self.profile_dir, lock_name)
+            if os.path.exists(lf):
+                try:
+                    os.remove(lf)
+                except Exception:
+                    pass
+
         try:
             # First try default installed chromedriver if available or webdriver-manager
             service = Service(ChromeDriverManager().install())
@@ -81,6 +90,35 @@ class WhatsAppBot:
             return False
         except Exception:
             return False
+
+    def get_qr_code(self):
+        """
+        Captures the QR code image from WhatsApp Web and returns it as a base64 string.
+        """
+        if not self.driver:
+            return None
+        try:
+            # 1. Try finding canvas directly
+            canvases = self.driver.find_elements(By.TAG_NAME, "canvas")
+            for c in canvases:
+                try:
+                    if c.is_displayed() and c.size['width'] > 80:
+                        return c.screenshot_as_base64
+                except Exception:
+                    continue
+
+            # 2. Try QR container
+            containers = self.driver.find_elements(By.XPATH, "//div[@data-ref] | //div[contains(@class, '_akau')] | //div[contains(@class, 'landing-wrapper')] | //div[@aria-label]")
+            for qc in containers:
+                try:
+                    if qc.is_displayed() and qc.size['width'] > 120:
+                        return qc.screenshot_as_base64
+                except Exception:
+                    continue
+
+            return None
+        except Exception:
+            return None
 
     def wait_for_login(self, max_wait_seconds=120, status_callback=None):
         """

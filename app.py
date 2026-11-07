@@ -42,11 +42,33 @@ campaign_state = {
 
 loaded_dataset = {
     'filename': None,
+    'filepath': None,
     'columns': [],
     'rows': [],
     'detected_columns': {},
     'total_rows': 0
 }
+
+def preload_default_contacts():
+    global loaded_dataset
+    default_files = ['./Saudi_Travel_Directory.xlsx', './Saudi_Travel_Directory.csv', './sample_contacts.csv']
+    for df_path in default_files:
+        full_p = os.path.abspath(df_path)
+        if os.path.exists(full_p):
+            try:
+                data = excel_processor.read_contacts_file(full_p, default_country="SA")
+                loaded_dataset['filename'] = os.path.basename(full_p)
+                loaded_dataset['filepath'] = full_p
+                loaded_dataset['columns'] = data['columns']
+                loaded_dataset['rows'] = data['rows']
+                loaded_dataset['detected_columns'] = data['detected_columns']
+                loaded_dataset['total_rows'] = data['total_rows']
+                campaign_state['total'] = data['total_rows']
+                break
+            except Exception as e:
+                pass
+
+preload_default_contacts()
 
 def add_log(message, level="info"):
     timestamp = datetime.now().strftime("%H:%M:%S")
@@ -59,6 +81,27 @@ def add_log(message, level="info"):
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/api/initial-state', methods=['GET'])
+def get_initial_state():
+    wa_logged = False
+    wa_running = False
+    if whatsapp_instance and whatsapp_instance.driver:
+        wa_running = True
+        wa_logged = whatsapp_instance.is_logged_in()
+
+    return jsonify({
+        'has_data': loaded_dataset['total_rows'] > 0,
+        'filename': loaded_dataset['filename'],
+        'columns': loaded_dataset['columns'],
+        'total_rows': loaded_dataset['total_rows'],
+        'preview': loaded_dataset['rows'][:5],
+        'detected': loaded_dataset['detected_columns'],
+        'whatsapp_status': {
+            'running': wa_running,
+            'logged_in': wa_logged
+        }
+    })
 
 @app.route('/api/upload', methods=['POST'])
 def upload_file():
@@ -146,6 +189,24 @@ def check_whatsapp_status():
     
     logged_in = whatsapp_instance.is_logged_in()
     return jsonify({'running': True, 'logged_in': logged_in})
+
+@app.route('/api/whatsapp/qr', methods=['GET'])
+def get_whatsapp_qr():
+    global whatsapp_instance
+    if not whatsapp_instance or not whatsapp_instance.driver:
+        return jsonify({'has_qr': False, 'logged_in': False})
+    
+    try:
+        if whatsapp_instance.is_logged_in():
+            return jsonify({'logged_in': True, 'has_qr': False})
+
+        qr_b64 = whatsapp_instance.get_qr_code()
+        if qr_b64:
+            return jsonify({'has_qr': True, 'qr': qr_b64, 'logged_in': False})
+    except Exception as e:
+        return jsonify({'has_qr': False, 'error': str(e), 'logged_in': False})
+        
+    return jsonify({'has_qr': False, 'logged_in': False})
 
 @app.route('/api/test-email', methods=['POST'])
 def test_email():

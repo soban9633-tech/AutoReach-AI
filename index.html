@@ -1467,6 +1467,19 @@ We hope you are having a wonderful day! We are reaching out regarding an exclusi
                         <div id="waDetailedStatus" style="font-weight: 600; margin-bottom: 16px; color: var(--text-secondary);">
                             Chrome browser is currently idle. Click the green button below to launch.
                         </div>
+
+                        <!-- In-Page QR Code Display -->
+                        <div id="waQrCodeDisplay" style="display: none; margin: 18px auto; text-align: center;">
+                            <div style="background: #ffffff; padding: 14px; border-radius: 14px; display: inline-block; box-shadow: 0 8px 32px rgba(0,0,0,0.6);">
+                                <img id="waQrCodeImg" src="" alt="WhatsApp QR Code" style="width: 250px; height: 250px; display: block; border-radius: 6px; object-fit: contain;">
+                            </div>
+                            <div style="margin-top: 12px; font-weight: 700; color: #38bdf8; font-size: 15px;">
+                                <i class="fa-solid fa-qrcode"></i> Point Phone Camera at this QR Code
+                            </div>
+                            <small style="color: #94a3b8; display: block; margin-top: 4px; font-size: 12px;">
+                                WhatsApp ➔ 3 Dots / Settings ➔ Linked Devices ➔ Link a Device
+                            </small>
+                        </div>
                         <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
                             <button type="button" class="btn-pro btn-pro-wa" id="btnLaunchWhatsApp">
                                 <i class="fa-brands fa-whatsapp"></i> Launch WhatsApp Web & Login
@@ -1673,8 +1686,22 @@ document.addEventListener('DOMContentLoaded', () => {
     initCampaignControls();
     initPhoneMockupSync();
 
-    // Check status initially
-    checkWhatsAppStatus();
+    // Load initial state
+    fetch('/api/initial-state')
+        .then(res => res.json())
+        .then(data => {
+            if (data.has_data) {
+                handleParsedData(data);
+            }
+            if (data.whatsapp_status && data.whatsapp_status.logged_in) {
+                setWhatsAppConnectedUI();
+            } else {
+                checkWhatsAppStatus();
+            }
+        })
+        .catch(() => {
+            checkWhatsAppStatus();
+        });
 });
 
 // 1. TABS NAVIGATION
@@ -2020,7 +2047,7 @@ function initWhatsAppActions() {
 
     if (btnLaunch) {
         btnLaunch.addEventListener('click', () => {
-            waDetail.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-accent"></i> Opening Google Chrome for WhatsApp Web...';
+            waDetail.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-accent"></i> Opening WhatsApp Web...';
             fetch('/api/whatsapp/launch', { method: 'POST' })
                 .then(res => res.json())
                 .then(data => {
@@ -2028,7 +2055,7 @@ function initWhatsAppActions() {
                         if (data.logged_in) {
                             setWhatsAppConnectedUI();
                         } else {
-                            waDetail.innerHTML = '<span class="text-warning"><i class="fa-solid fa-qrcode"></i> Chrome is open! Scan the QR code in Chrome with your phone.</span>';
+                            waDetail.innerHTML = '<span class="text-warning"><i class="fa-solid fa-qrcode"></i> Loading QR code... Please wait a few seconds.</span>';
                             startPollingWhatsAppStatus();
                         }
                     } else {
@@ -2045,16 +2072,30 @@ function initWhatsAppActions() {
 }
 
 function checkWhatsAppStatus() {
-    fetch('/api/whatsapp/status')
+    fetch('/api/whatsapp/qr')
         .then(res => res.json())
         .then(data => {
+            const qrDisplay = document.getElementById('waQrCodeDisplay');
+            const qrImg = document.getElementById('waQrCodeImg');
+            const waDetail = document.getElementById('waDetailedStatus');
+
             if (data.logged_in) {
+                if (qrDisplay) qrDisplay.style.display = 'none';
                 setWhatsAppConnectedUI();
-            } else if (data.running) {
-                const waDetail = document.getElementById('waDetailedStatus');
+            } else if (data.has_qr && data.qr) {
+                if (qrDisplay) qrDisplay.style.display = 'block';
+                if (qrImg) qrImg.src = 'data:image/png;base64,' + data.qr;
                 if (waDetail) {
-                    waDetail.innerHTML = '<span class="text-warning"><i class="fa-solid fa-qrcode"></i> Chrome is open. Please scan QR code.</span>';
+                    waDetail.innerHTML = '<span class="text-accent"><i class="fa-solid fa-qrcode"></i> Scan the QR code below with your phone:</span>';
                 }
+            } else {
+                fetch('/api/whatsapp/status')
+                    .then(r => r.json())
+                    .then(st => {
+                        if (st.running && waDetail) {
+                            waDetail.innerHTML = '<span class="text-warning"><i class="fa-solid fa-spinner fa-spin"></i> WhatsApp Web is loading, please wait...</span>';
+                        }
+                    });
             }
         })
         .catch(() => {});
@@ -2062,8 +2103,10 @@ function checkWhatsAppStatus() {
 
 function setWhatsAppConnectedUI() {
     const waDetail = document.getElementById('waDetailedStatus');
+    const qrDisplay = document.getElementById('waQrCodeDisplay');
+    if (qrDisplay) qrDisplay.style.display = 'none';
     if (waDetail) {
-        waDetail.innerHTML = '<span class="text-success"><i class="fa-solid fa-circle-check"></i> WhatsApp Web is Connected & Ready!</span>';
+        waDetail.innerHTML = '<span class="text-success" style="font-size: 16px;"><i class="fa-solid fa-circle-check"></i> <strong>WhatsApp Web is Connected & Ready to Send!</strong></span>';
     }
     const pill = document.getElementById('waStatusPill');
     if (pill) pill.classList.add('connected');
@@ -2071,18 +2114,31 @@ function setWhatsAppConnectedUI() {
     if (text) text.innerText = 'WhatsApp: Online';
 }
 
+let waPollInterval = null;
 function startPollingWhatsAppStatus() {
-    const interval = setInterval(() => {
-        fetch('/api/whatsapp/status')
+    if (waPollInterval) clearInterval(waPollInterval);
+    const qrDisplay = document.getElementById('waQrCodeDisplay');
+    const qrImg = document.getElementById('waQrCodeImg');
+    const waDetail = document.getElementById('waDetailedStatus');
+
+    waPollInterval = setInterval(() => {
+        fetch('/api/whatsapp/qr')
             .then(res => res.json())
             .then(data => {
                 if (data.logged_in) {
-                    clearInterval(interval);
+                    clearInterval(waPollInterval);
+                    waPollInterval = null;
                     setWhatsAppConnectedUI();
+                } else if (data.has_qr && data.qr) {
+                    if (qrDisplay) qrDisplay.style.display = 'block';
+                    if (qrImg) qrImg.src = 'data:image/png;base64,' + data.qr;
+                    if (waDetail) {
+                        waDetail.innerHTML = '<span class="text-accent"><i class="fa-solid fa-qrcode"></i> <strong>Point Phone Camera at this QR Code:</strong></span>';
+                    }
                 }
             })
             .catch(() => {});
-    }, 4000);
+    }, 2500);
 }
 
 // 6. CAMPAIGN CONTROLS & REAL-TIME LOGS

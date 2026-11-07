@@ -1,5 +1,5 @@
 @echo off
-title AutoReach AI - Excel WhatsApp & Email Automation
+title AutoReach AI Tool
 color 0b
 
 echo ========================================================
