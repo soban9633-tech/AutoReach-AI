@@ -112,7 +112,7 @@ def read_contacts_file(filepath, default_country="AUTO"):
 
     phone_patterns = [r'phone', r'mobile', r'cell', r'whatsapp', r'contact', r'number', r'rabta', r'num', r'tel']
     email_patterns = [r'email', r'e-mail', r'mail']
-    name_patterns = [r'name', r'customer', r'client', r'full.*name', r'first.*name', r'naam', r'person']
+    name_patterns = [r'travel', r'passenger', r'tourist', r'guest', r'name', r'customer', r'client', r'full.*name', r'first.*name', r'naam', r'person']
 
     for col in columns:
         col_lower = col.lower()

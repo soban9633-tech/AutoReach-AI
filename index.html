@@ -1347,14 +1347,14 @@ body {
                         </div>
                         <div class="form-group">
                             <label class="form-label">Message Body:</label>
-                            <textarea id="waMessageText" class="form-textarea" rows="7" placeholder="Hello {Name},&#10;&#10;We are reaching out regarding our special service offer...&#10;&#10;Best regards,&#10;Our Company">Hello {Name},
+                            <textarea id="waMessageText" class="form-textarea" rows="7" placeholder="Hello {Name},&#10;&#10;We are reaching out regarding our special service offer...&#10;&#10;Best regards,&#10;Our Company">Hello {Traveler Name}! ✈️
 
-We hope you are having a wonderful day! We are reaching out regarding an exclusive update for {Company}. 
+Your travel booking update for {Destination} ({Package}) on {Travel Date} is confirmed!
 
-Please feel free to reply directly to this message if you have any questions or would like more details.
+Your booking status is: {Status}. Please let us know if you require airport transfer or travel assistance.
 
-Best regards,
-Business Outreach Team</textarea>
+Safe travels!
+Travel & Tours Team</textarea>
                             <small class="help-text">The live phone screen on the right shows how this message appears on mobile devices.</small>
                         </div>
                     </div>
@@ -1366,20 +1366,24 @@ Business Outreach Team</textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Email Subject:</label>
-                            <input type="text" id="emailSubject" class="form-input" value="Special Update for {Name}">
+                            <input type="text" id="emailSubject" class="form-input" value="Travel Booking Update for {Traveler Name} - {Destination}">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Email Body:</label>
-                            <textarea id="emailBody" class="form-textarea" rows="6" placeholder="Dear {Name},&#10;&#10;We are pleased to introduce...&#10;&#10;Best regards,&#10;Your Team">Dear {Name},
+                            <textarea id="emailBody" class="form-textarea" rows="6" placeholder="Dear {Name},&#10;&#10;We are pleased to introduce...&#10;&#10;Best regards,&#10;Your Team">Dear {Traveler Name},
 
-We hope this email finds you well. 
+We hope you are excited for your upcoming journey! Here are your travel booking details:
 
-This is a personalized follow-up regarding our services for {Company}. We would love to assist you with any inquiries or requests you may have.
+- Traveler Name: {Traveler Name}
+- Destination: {Destination}
+- Departure Date: {Travel Date}
+- Selected Package: {Package}
+- Status: {Status}
 
-Feel free to reply directly to this email at any time.
+Please reply directly to this email if you need any ticket or visa adjustments.
 
-Sincerely,
-Client Success Team</textarea>
+Wishing you safe travels!
+Travel Reservations Desk</textarea>
                         </div>
 
                         <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
@@ -1407,7 +1411,7 @@ Client Success Team</textarea>
                             <div class="phone-screen-header">
                                 <div class="phone-avatar">C</div>
                                 <div class="phone-contact-info">
-                                    <div class="phone-contact-name" id="mockupContactName">Ali Khan</div>
+                                    <div class="phone-contact-name" id="mockupContactName">Muhammad Rizwan</div>
                                     <div class="phone-contact-status">online</div>
                                 </div>
                                 <i class="fa-solid fa-video text-muted"></i>
@@ -1416,7 +1420,7 @@ Client Success Team</textarea>
 
                             <div class="phone-chat-body">
                                 <div class="wa-message-bubble">
-                                    <div id="mockupMessageText">Hello Ali Khan!
+                                    <div id="mockupMessageText">Hello Muhammad Rizwan!
 
 We hope you are having a wonderful day! We are reaching out regarding an exclusive update.</div>
                                     <div class="wa-bubble-footer">
@@ -1805,7 +1809,7 @@ function handleParsedData(data) {
     // Update Phone Mockup with First Contact Name
     if (data.preview && data.preview.length > 0 && data.detected.name) {
         const firstContact = data.preview[0];
-        const firstName = firstContact[data.detected.name] || 'Ali Khan';
+        const firstName = firstContact[data.detected.name] || 'Muhammad Rizwan';
         const mockupName = document.getElementById('mockupContactName');
         if (mockupName) mockupName.innerText = firstName;
         updateMockupText();
@@ -1918,7 +1922,7 @@ function updateMockupText() {
     const mockupBubble = document.getElementById('mockupMessageText');
     if (!waText || !mockupBubble) return;
 
-    let sampleName = 'Ali Khan';
+    let sampleName = 'Muhammad Rizwan';
     if (samplePreviewRows && samplePreviewRows.length > 0) {
         const nameCol = document.getElementById('mapName')?.value;
         if (nameCol && samplePreviewRows[0][nameCol]) {
