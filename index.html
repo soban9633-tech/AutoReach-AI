@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoReach AI - Turn Your Excel Sheets into Automated WhatsApp & Email Campaigns Instantly</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Ambient Background Light Effects -->
+    <div class="bg-ambient">
+        <div class="ambient-light-1"></div>
+        <div class="ambient-light-2"></div>
+        <div class="ambient-light-3"></div>
+    </div>
+
+    <div class="app-wrapper">
+        <!-- Top Navigation Bar -->
+        <header class="top-navbar">
+            <a href="#" class="brand-wrapper">
+                <div class="brand-icon-box">
+                    <i class="fa-solid fa-bolt-lightning"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>AutoReach AI <span class="version-tag">PRO v2.4</span></h1>
+                    <span class="brand-urdu-tag">آٹومیٹڈ واٹس ایپ اور ای میل سینڈر</span>
+                </div>
+            </a>
+
+            <!-- System Indicators -->
+            <div class="nav-indicators">
+                <div class="status-badge wa-badge" id="waStatusPill">
+                    <span class="dot"></span>
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span id="waStatusText">WhatsApp: Offline</span>
+                </div>
+                <div class="status-badge email-badge" id="emailStatusPill">
+                    <span class="dot"></span>
+                    <i class="fa-solid fa-envelope"></i>
+                    <span id="emailStatusText">SMTP: Ready</span>
+                </div>
+                <div class="status-badge contacts-counter-badge">
+                    <i class="fa-solid fa-address-book"></i>
+                    <span>Total Contacts: <strong id="totalContactsBadge">0</strong></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section with User's Exact Heading & Copy -->
+        <section class="hero-section">
+            <div class="hero-pill">
+                <span class="pulse-indicator"></span>
+                <span>Next-Gen Bulk Outreach Automation Engine • Zero Meta Cloud Fees</span>
+            </div>
+
+            <h1 class="hero-title">
+                Turn Your Excel Sheets into Automated <span class="gradient-text">WhatsApp & Email Campaigns</span> Instantly
+            </h1>
+
+            <p class="hero-lead">
+                Upload your contact list, customize your message templates, and let the system handle the outreach. Deliver personalized WhatsApp messages and high-deliverability emails automatically without manual effort or account bans.
+            </p>
+
+            <div class="hero-urdu-box">
+                اپنی ایکسل شیٹ اپلوڈ کریں، پرسنلائزڈ میسج لکھیں اور بغیر کسی اکاؤنٹ بین کے خودکار طریقے سے پیغامات بھیجنا شروع کریں۔
+            </div>
+
+            <div class="features-bar">
+                <div class="feature-pill-item">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Smart Anti-Ban Safe Delays</span>
+                </div>
+                <div class="feature-pill-item">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Auto Column Detection</span>
+                </div>
+                <div class="feature-pill-item">
+                    <i class="fa-solid fa-qrcode"></i>
+                    <span>1-Click WhatsApp Web QR Login</span>
+                </div>
+                <div class="feature-pill-item">
+                    <i class="fa-solid fa-file-excel"></i>
+                    <span>Downloadable Delivery Reports</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4-Step Interactive Workflow Navigation -->
+        <nav class="workflow-nav-wrapper">
+            <div class="workflow-tabs">
+                <button class="tab-trigger active" data-tab="tab-upload">
+                    <span class="tab-step-badge">1</span>
+                    <i class="fa-solid fa-file-excel"></i>
+                    <span>Upload Sheet (ایکسل فائل)</span>
+                </button>
+                <button class="tab-trigger" data-tab="tab-message">
+                    <span class="tab-step-badge">2</span>
+                    <i class="fa-solid fa-comment-dots"></i>
+                    <span>Message Templates (پیغام)</span>
+                </button>
+                <button class="tab-trigger" data-tab="tab-config">
+                    <span class="tab-step-badge">3</span>
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>Channel Settings (سیٹنگز)</span>
+                </button>
+                <button class="tab-trigger" data-tab="tab-campaign">
+                    <span class="tab-step-badge">4</span>
+                    <i class="fa-solid fa-rocket"></i>
+                    <span>Launch & Live Logs (شروع کریں)</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- TAB 1: UPLOAD & MAPPING -->
+        <section class="tab-content active" id="tab-upload">
+            <div class="grid-2">
+                <!-- Dropzone Area -->
+                <div class="pro-card">
+                    <div class="pro-card-header">
+                        <h3><i class="fa-solid fa-cloud-arrow-up text-accent"></i> 1. Select Contact Sheet</h3>
+                        <button type="button" class="btn-pro btn-pro-outline font-sm" id="btnLoadSample">
+                            <i class="fa-solid fa-flask"></i> Load Sample Data (ٹیسٹ شیٹ)
+                        </button>
+                    </div>
+                    <p class="card-subtitle">
+                        ایکسل فائل منتخب کریں جس میں آپ کے کلائنٹس کے نمبرز اور ای میلز موجود ہیں۔
+                    </p>
+
+                    <div class="dropzone-container" id="dropZone">
+                        <input type="file" id="fileInput" accept=".xlsx, .xls, .csv" hidden>
+                        <div class="drop-icon-wrapper">
+                            <i class="fa-solid fa-file-excel"></i>
+                        </div>
+                        <h4 class="drop-headline">Drag & Drop your Excel file here</h4>
+                        <p class="drop-subtext">یا نیچے دیا گیا بٹن دبا کر فائل منتخب کریں</p>
+
+                        <!-- User's Requested Button -->
+                        <button type="button" class="btn-file-select" onclick="document.getElementById('fileInput').click()">
+                            <i class="fa-solid fa-folder-open"></i> File select karne ke liye (Browse Files)
+                        </button>
+
+                        <div class="file-type-tags">
+                            <span class="tag-badge">.XLSX</span>
+                            <span class="tag-badge">.XLS</span>
+                            <span class="tag-badge">.CSV</span>
+                            <span class="tag-badge">UP TO 50MB</span>
+                        </div>
+                    </div>
+
+                    <div class="file-loaded-banner hidden" id="fileInfoBadge">
+                        <div class="file-loaded-info">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <div>
+                                <div id="loadedFileName" style="color: white;">contacts.xlsx</div>
+                                <small class="text-muted">Loaded Successfully</small>
+                            </div>
+                        </div>
+                        <span class="status-badge connected" id="loadedRowCount">0 Contacts</span>
+                    </div>
+                </div>
+
+                <!-- Column Auto-Mapper -->
+                <div class="pro-card">
+                    <div class="pro-card-header">
+                        <h3><i class="fa-solid fa-diagram-project text-cyan"></i> 2. Auto-Detected Columns</h3>
+                    </div>
+                    <p class="card-subtitle">
+                        ٹول نے خود بخود مناسب کالمز پہچان لیے ہیں۔ ضرورت ہو تو خود منتخب کر سکتے ہیں:
+                    </p>
+
+                    <div class="form-group">
+                        <label class="form-label"><i class="fa-brands fa-whatsapp text-success"></i> WhatsApp Phone Number Column:</label>
+                        <select id="mapPhone" class="form-select">
+                            <option value="">-- Upload a file first --</option>
+                        </select>
+                        <small class="help-text">فون نمبرز والا کالم سلیکٹ کریں</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label"><i class="fa-solid fa-envelope text-email"></i> Email Column:</label>
+                        <select id="mapEmail" class="form-select">
+                            <option value="">-- Upload a file first --</option>
+                        </select>
+                        <small class="help-text">ای میل ایڈریسز والا کالم</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label"><i class="fa-solid fa-user text-warning"></i> Client Name Column:</label>
+                        <select id="mapName" class="form-select">
+                            <option value="">-- Upload a file first --</option>
+                        </select>
+                        <small class="help-text">کلائنٹ کے نام والا کالم (میسج میں نام لگانے کے لیے)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label"><i class="fa-solid fa-earth-americas text-cyan"></i> Country Format / Mode (تمام ممالک سپورٹڈ ہیں):</label>
+                        <select id="countryModeSelect" class="form-select">
+                            <option value="AUTO" selected>🌍 Worldwide / Auto-Detect All Countries (تمام ممالک خودکار)</option>
+                            <option value="PK">🇵🇰 Pakistan (+92 / 03xx)</option>
+                            <option value="AE">🇦🇪 United Arab Emirates (+971 / 05xx)</option>
+                            <option value="SA">🇸🇦 Saudi Arabia (+966 / 05xx)</option>
+                            <option value="US">🇺🇸 United States / Canada (+1)</option>
+                            <option value="GB">🇬🇧 United Kingdom (+44)</option>
+                            <option value="IN">🇮🇳 India (+91)</option>
+                            <option value="OM">🇴🇲 Oman (+968)</option>
+                            <option value="QA">🇶🇦 Qatar (+974)</option>
+                            <option value="KW">🇰🇼 Kuwait (+965)</option>
+                            <option value="BH">🇧🇭 Bahrain (+973)</option>
+                            <option value="DE">🇩🇪 Germany (+49)</option>
+                            <option value="TR">🇹🇷 Turkey (+90)</option>
+                            <option value="AU">🇦🇺 Australia (+61)</option>
+                        </select>
+                        <small class="help-text">
+                            <i class="fa-solid fa-circle-check text-success"></i> <strong>تمام ممالک کے نمبرز سپورٹڈ ہیں:</strong> چاہے شیٹ میں ایک ہی ملک کے ہوں یا مکس ممالک کے نمبرز ہوں، سسٹم خود بخود پہچان لے گا۔
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contacts Preview Table -->
+            <div class="pro-card mt-4">
+                <div class="pro-card-header">
+                    <h3><i class="fa-solid fa-table-list text-accent"></i> Contacts Preview (شیٹ کا پری ویو)</h3>
+                    <span class="status-badge contacts-counter-badge" id="previewTotalBadge">0 Leads Loaded</span>
+                </div>
+                <div class="pro-table-wrapper">
+                    <table class="pro-table" id="previewTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2" class="text-center text-muted" style="padding: 30px;">
+                                    کوئی فائل اپلوڈ نہیں ہوئی۔ اوپر موجود "File select karne ke liye" بٹن پر کلک کریں۔
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: MESSAGE TEMPLATES & LIVE PHONE PREVIEW -->
+        <section class="tab-content" id="tab-message">
+            <div class="variables-ribbon">
+                <span class="ribbon-label"><i class="fa-solid fa-tags"></i> Dynamic Personalization Tags:</span>
+                <div class="tags-group" id="variablesTags">
+                    <button type="button" class="var-tag-btn" data-var="{Name}">+ {Name}</button>
+                    <button type="button" class="var-tag-btn" data-var="{Phone}">+ {Phone}</button>
+                    <button type="button" class="var-tag-btn" data-var="{Email}">+ {Email}</button>
+                    <button type="button" class="var-tag-btn" data-var="{Company}">+ {Company}</button>
+                </div>
+                <small class="text-muted ml-auto">ٹیگ پر کلک کریں، یہ خود بخود میسج میں ایڈ ہو جائے گا</small>
+            </div>
+
+            <div class="grid-2">
+                <!-- Text Editors -->
+                <div>
+                    <!-- WhatsApp Template -->
+                    <div class="pro-card mb-4">
+                        <div class="pro-card-header">
+                            <h3><i class="fa-brands fa-whatsapp text-success"></i> WhatsApp Message Template</h3>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Message Content (اردو یا انگلش):</label>
+                            <textarea id="waMessageText" class="form-textarea" rows="7" placeholder="Salam {Name}!&#10;&#10;Umeed hai aap theek hongey. Humari service ke hawalay se rabta kar rahay hain...&#10;&#10;Regards,&#10;Your Business">Salam {Name}! 
+
+Umeed hai aap theek hongey. Ye aik automated personalized message hai. Agar aap ko mazeed maloomat chahiye ho to zaroor rabta karein!
+
+Regards,
+My Business</textarea>
+                            <small class="help-text">دائیں جانب فون پری ویو میں دیکھ سکتے ہیں کہ یہ میسج موبائل پر کیسا لگے گا</small>
+                        </div>
+                    </div>
+
+                    <!-- Email Template -->
+                    <div class="pro-card">
+                        <div class="pro-card-header">
+                            <h3><i class="fa-solid fa-envelope text-email"></i> Email Message Template</h3>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email Subject (موضوع):</label>
+                            <input type="text" id="emailSubject" class="form-input" value="Special Update for {Name}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email Body (پیغام):</label>
+                            <textarea id="emailBody" class="form-textarea" rows="6" placeholder="Hi {Name},&#10;&#10;We are reaching out to you regarding...&#10;&#10;Best regards,&#10;Your Team">Dear {Name},
+
+We hope this email finds you well. 
+
+This is an automated communication regarding your inquiry. Please feel free to reply directly to this email if you have any questions.
+
+Best regards,
+Business Outreach Team</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Phone Mockup Preview -->
+                <div class="pro-card text-center">
+                    <div class="pro-card-header">
+                        <h3><i class="fa-solid fa-mobile-screen-button text-cyan"></i> Live Phone Mockup</h3>
+                        <span class="status-badge wa-badge connected"><span class="dot"></span> Real-time Preview</span>
+                    </div>
+                    <p class="card-subtitle">جیسے جیسے آپ بائیں طرف لکھیں گے، یہ خود بخود اپڈیٹ ہوگا:</p>
+
+                    <div class="phone-mockup-wrapper">
+                        <div class="phone-screen">
+                            <div class="phone-screen-header">
+                                <div class="phone-avatar">C</div>
+                                <div class="phone-contact-info">
+                                    <div class="phone-contact-name" id="mockupContactName">Ali Khan</div>
+                                    <div class="phone-contact-status">online</div>
+                                </div>
+                                <i class="fa-solid fa-video text-muted"></i>
+                                <i class="fa-solid fa-phone text-muted" style="margin-left: 10px;"></i>
+                            </div>
+
+                            <div class="phone-chat-body">
+                                <div class="wa-message-bubble">
+                                    <div id="mockupMessageText">Salam Ali Khan! 
+
+Umeed hai aap theek hongey. Ye aik automated personalized message hai.</div>
+                                    <div class="wa-bubble-footer">
+                                        <span>12:45 PM</span>
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: SETTINGS -->
+        <section class="tab-content" id="tab-config">
+            <div class="grid-2">
+                <!-- WhatsApp Web Settings -->
+                <div class="pro-card">
+                    <div class="pro-card-header">
+                        <h3><i class="fa-brands fa-whatsapp text-success"></i> WhatsApp Web Connection</h3>
+                    </div>
+                    <p class="card-subtitle">
+                        واٹس ایپ سے میسج بھیجنے کے لیے نیچے دیے گئے بٹن پر کلک کریں۔ کروم براؤزر کھلے گا، اس میں اپنے واٹس ایپ سے کیو آر کوڈ (QR Code) اسکین کر لیں:
+                    </p>
+
+                    <div style="background: var(--bg-black); border: 1px solid var(--border-card); border-radius: var(--radius-sm); padding: 22px; text-align: center; margin-bottom: 20px;">
+                        <div id="waDetailedStatus" style="font-weight: 600; margin-bottom: 16px; color: var(--text-secondary);">
+                            کروم براؤزر ابھی بند ہے۔ نیچے دیا گیا سبز بٹن دبائیں۔
+                        </div>
+                        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                            <button type="button" class="btn-pro btn-pro-wa" id="btnLaunchWhatsApp">
+                                <i class="fa-brands fa-whatsapp"></i> Launch WhatsApp Web & Login (کروم کھولیں)
+                            </button>
+                            <button type="button" class="btn-pro btn-pro-outline" id="btnCheckWhatsAppStatus">
+                                <i class="fa-solid fa-rotate"></i> Check Connection
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="feature-pill-item" style="background: rgba(37, 211, 102, 0.08); border-color: rgba(37, 211, 102, 0.3);">
+                        <i class="fa-solid fa-lock" style="color: var(--wa-green);"></i>
+                        <span style="color: #d1fae5; font-size: 13px;">
+                            <strong>سیشن محفوظ رہتا ہے:</strong> صرف ایک بار کیو آر اسکین کرنا پڑے گا، آئندہ خود بخود لاگ ان رہے گا۔
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Email SMTP Settings -->
+                <div class="pro-card">
+                    <div class="pro-card-header">
+                        <h3><i class="fa-solid fa-envelope-circle-check text-email"></i> Email SMTP Configuration</h3>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Provider:</label>
+                        <select id="emailProvider" class="form-select">
+                            <option value="gmail" selected>Gmail (smtp.gmail.com)</option>
+                            <option value="outlook">Outlook / Hotmail</option>
+                            <option value="yahoo">Yahoo Mail</option>
+                            <option value="custom">Custom SMTP (cPanel / Titan / Domain)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Sender Email Address (آپ کا ای میل):</label>
+                        <input type="email" id="senderEmail" class="form-input" placeholder="yourbusiness@gmail.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">App Password (گوگل ایپ پاسورڈ):</label>
+                        <input type="password" id="senderPassword" class="form-input" placeholder="16-letter App Password">
+                        <small class="help-text">
+                            Gmail کے لیے اپنا عام پاسورڈ نہیں بلکہ <strong>Google App Password</strong> استعمال کریں (<a href="https://myaccount.google.com/apppasswords" target="_blank" style="color: var(--email-blue); text-decoration: underline;">یہاں سے جنریٹ کریں</a>).
+                        </small>
+                    </div>
+
+                    <div id="customSmtpFields" class="hidden">
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label class="form-label">SMTP Server Host:</label>
+                                <input type="text" id="customHost" class="form-input" placeholder="mail.yourdomain.com">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Port:</label>
+                                <input type="number" id="customPort" class="form-input" value="587">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 18px;">
+                        <button type="button" class="btn-pro btn-pro-outline" id="btnTestEmail">
+                            <i class="fa-solid fa-vial-circle-check"></i> Test Email Credentials (ٹیسٹ کریں)
+                        </button>
+                        <span id="testEmailResult" class="font-sm" style="margin-left: 12px;"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Anti-Ban & Safe Delay -->
+            <div class="pro-card mt-4">
+                <div class="pro-card-header">
+                    <h3><i class="fa-solid fa-shield-virus text-warning"></i> Anti-Ban Safe Delays (واٹس ایپ محفوظ رکھنے کے لیے وقفہ)</h3>
+                </div>
+                <div class="grid-3">
+                    <div class="form-group">
+                        <label class="form-label">Minimum Delay (سیکنڈز):</label>
+                        <input type="number" id="minDelay" class="form-input" value="6" min="3" max="60">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Maximum Delay (سیکنڈز):</label>
+                        <input type="number" id="maxDelay" class="form-input" value="12" min="5" max="120">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Active Channels:</label>
+                        <div style="display: flex; gap: 20px; margin-top: 10px;">
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600;">
+                                <input type="checkbox" id="chkWhatsApp" checked> WhatsApp
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600;">
+                                <input type="checkbox" id="chkEmail" checked> Email
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: CAMPAIGN LAUNCH & LIVE TERMINAL -->
+        <section class="tab-content" id="tab-campaign">
+            <!-- Launch Banner -->
+            <div class="launch-banner">
+                <div class="launch-banner-text">
+                    <h2>Ready to Launch Outreach Campaign?</h2>
+                    <p>ایک کلک کریں اور تمام نمبرز اور ای میلز پر خود بخود پرسنلائزڈ میسجز جانا شروع ہو جائیں گے:</p>
+                </div>
+                <div class="launch-actions">
+                    <button type="button" class="btn-pro btn-pro-primary btn-pro-lg" id="btnStartCampaign">
+                        <i class="fa-solid fa-play"></i> Start Automated Campaign (شروع کریں)
+                    </button>
+                    <button type="button" class="btn-pro btn-pro-danger btn-pro-lg" id="btnStopCampaign" disabled>
+                        <i class="fa-solid fa-pause"></i> Pause / Stop (روکیں)
+                    </button>
+                    <a href="/api/download-report" class="btn-pro btn-pro-wa btn-pro-lg" id="btnDownloadReport" style="display:none;">
+                        <i class="fa-solid fa-file-arrow-down"></i> Download Excel Report (رپورٹ ڈاؤنلوڈ)
+                    </a>
+                </div>
+            </div>
+
+            <!-- Live Progress Bar & Metrics -->
+            <div class="pro-card">
+                <div class="pro-progress-container">
+                    <div class="pro-progress-header">
+                        <div>
+                            <span style="font-weight: 700; color: var(--text-secondary);">Campaign Status:</span>
+                            <span class="progress-active-target" id="currentTargetText">Waiting to start...</span>
+                        </div>
+                        <span class="progress-pct" id="progressPercent">0%</span>
+                    </div>
+                    <div class="pro-progress-track">
+                        <div class="pro-progress-fill" id="progressBarFill" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <!-- KPI Metrics Cards -->
+                <div class="metrics-hub">
+                    <div class="metric-box">
+                        <div class="metric-name">Total Leads</div>
+                        <div class="metric-number text-white" id="metricTotal">0</div>
+                    </div>
+                    <div class="metric-box metric-sent">
+                        <div class="metric-name">Successfully Sent</div>
+                        <div class="metric-number text-success" id="metricSent">0</div>
+                    </div>
+                    <div class="metric-box metric-failed">
+                        <div class="metric-name">Failed / Skipped</div>
+                        <div class="metric-number text-danger" id="metricFailed">0</div>
+                    </div>
+                    <div class="metric-box metric-remaining">
+                        <div class="metric-name">Remaining</div>
+                        <div class="metric-number text-cyan" id="metricRemaining">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terminal Console -->
+            <div class="terminal-card mt-4">
+                <div class="terminal-header">
+                    <div class="terminal-title">
+                        <div class="terminal-dots">
+                            <span class="dot-r"></span>
+                            <span class="dot-y"></span>
+                            <span class="dot-g"></span>
+                        </div>
+                        <i class="fa-solid fa-terminal" style="margin-left: 10px;"></i>
+                        <span>LIVE EXECUTION TERMINAL</span>
+                    </div>
+                    <button type="button" class="btn-pro btn-pro-outline font-sm" id="btnClearLogs">
+                        <i class="fa-solid fa-trash-can"></i> Clear Terminal
+                    </button>
+                </div>
+                <div class="terminal-body" id="terminalLogs">
+                    <div class="t-line">
+                        <span class="t-time">[00:00:00]</span>
+                        <span class="t-msg-info">System initialized. AutoReach Pro Engine ready for execution.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="static/app.js"></script>
+</body>
+</html>

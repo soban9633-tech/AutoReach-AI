@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+
+# Sensitive WhatsApp Browser Session (Never commit session tokens or QR data)
+whatsapp_chrome_profile/
+
+# Uploads & Generated Reports (Keep folders, ignore user data)
+uploads/*
+!uploads/.gitkeep
+reports/*
+!reports/.gitkeep
+
+# Environment variables
+.env
+.venv/
+env/
