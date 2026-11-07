@@ -121,6 +121,10 @@ def load_sample():
 @app.route('/api/whatsapp/launch', methods=['POST'])
 def launch_whatsapp():
     global whatsapp_instance
+    if os.environ.get('VERCEL'):
+        return jsonify({
+            'error': 'WhatsApp Web automation requires Google Chrome and your physical computer screen to display the QR Code. Cloud servers (like Vercel) have no physical screen. Please run the tool on your PC at http://localhost:5000 (or double click start.bat) to scan QR code and send WhatsApp messages!'
+        }), 400
     try:
         if whatsapp_instance is None:
             whatsapp_instance = WhatsAppBot()

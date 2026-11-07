@@ -12,9 +12,16 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 class WhatsAppBot:
     def __init__(self, profile_dir=None):
+        import tempfile
         self.driver = None
-        self.profile_dir = profile_dir or os.path.abspath("./whatsapp_chrome_profile")
-        os.makedirs(self.profile_dir, exist_ok=True)
+        if os.environ.get('VERCEL'):
+            self.profile_dir = profile_dir or os.path.join(tempfile.gettempdir(), "whatsapp_chrome_profile")
+        else:
+            self.profile_dir = profile_dir or os.path.abspath("./whatsapp_chrome_profile")
+        try:
+            os.makedirs(self.profile_dir, exist_ok=True)
+        except Exception:
+            pass
 
     def start_browser(self):
         """
