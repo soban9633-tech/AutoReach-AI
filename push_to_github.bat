@@ -1,25 +1,27 @@
 @echo off
-title Push AutoReach AI to GitHub
+title Push AutoReach AI to GitHub (soban9633-tech)
 color 0b
 
 echo ========================================================
-echo        Pushing AutoReach AI to GitHub Repository
+echo        AutoReach AI - GitHub Repo Push Script
 echo ========================================================
 echo.
-
-set PATH=%LOCALAPPDATA%\Programs\MinGit\cmd;%PATH%
-
-echo Current remote:
-git remote -v
+echo Repo URL: https://github.com/soban9633-tech/AutoReach-AI.git
+echo Account: soban9633-tech (soban9633@gmail.com)
 echo.
 
-echo Staging any recent changes...
+set PATH=%LOCALAPPDATA%\Programs\MinGit\cmd;%LOCALAPPDATA%\Programs\MinGit\mingw64\bin;%PATH%
+
+echo Staging files...
 git add .
-git commit -m "update: AutoReach AI latest updates" 2>nul
+git commit -m "feat: AutoReach AI complete project push" 2>nul
 
 echo.
-echo Pushing to GitHub (main branch)...
-echo If prompted, please authenticate with your GitHub account or Token.
+echo ========================================================
+echo [INSTRUCTION]: 
+echo Agar samne "Sign in with your browser" ka pop-up aye, 
+echo to us par click karein. Browser khud verify kar le ga!
+echo ========================================================
 echo.
 
 git push -u origin main
@@ -27,14 +29,14 @@ git push -u origin main
 echo.
 if %ERRORLEVEL% equ 0 (
     echo ========================================================
-    echo [SUCCESS] Project pushed to GitHub successfully!
-    echo URL: https://github.com/soban9633-tech/AutoReach-AI
+    echo  SUCCESS! Mubarak ho, project GitHub par push ho gaya!
+    echo  Apni repo refresh kar ke dekhein:
+    echo  https://github.com/soban9633-tech/AutoReach-AI
     echo ========================================================
 ) else (
     echo ========================================================
-    echo [ERROR] Push failed. 
-    echo Please make sure you have access to the repo, or use a
-    echo GitHub Personal Access Token (PAT).
+    echo  Push me koi masla aya. 
+    echo  Agar token mangay to apna GitHub Personal Token paste karein.
     echo ========================================================
 )
 
