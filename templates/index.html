@@ -1350,12 +1350,12 @@ body {
                         </div>
                     </div>
                     <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; background: rgba(0,0,0,0.4); padding: 7px 16px; border-radius: 20px; border: 1px solid rgba(168, 85, 247, 0.4);">
-                        <input type="checkbox" id="chkUseGemini" style="width: 18px; height: 18px; accent-color: #a855f7; cursor: pointer;">
+                        <input type="checkbox" id="chkUseGemini" checked onchange="toggleGeminiPanel(this.checked)" style="width: 18px; height: 18px; accent-color: #a855f7; cursor: pointer;">
                         <span style="font-weight: 700; color: #f3e8ff; font-size: 13px;">Enable Gemini AI</span>
                     </label>
                 </div>
 
-                <div id="geminiConfigPanel" style="display: none; margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.08);">
+                <div id="geminiConfigPanel" style="display: block; margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.08);">
                     <div class="grid-2">
                         <div class="form-group">
                             <label class="form-label" style="display: flex; justify-content: space-between;">
@@ -1755,6 +1755,116 @@ document.addEventListener('DOMContentLoaded', () => {
             checkWhatsAppStatus();
         });
 });
+
+
+function toggleGeminiPanel(show) {
+    const panel = document.getElementById('geminiConfigPanel');
+    if (panel) panel.style.display = show ? 'block' : 'none';
+    localStorage.setItem('gemini_enabled', show ? 'true' : 'false');
+}
+
+function initGeminiAI() {
+    const chk = document.getElementById('chkUseGemini');
+    const panel = document.getElementById('geminiConfigPanel');
+    const keyInput = document.getElementById('geminiApiKey');
+    const offerInput = document.getElementById('geminiUserOffer');
+    const btnTest = document.getElementById('btnTestGemini');
+    const testResult = document.getElementById('geminiTestResult');
+    const btnPreview = document.getElementById('btnGenerateAiPreview');
+
+    // Restore saved API key and offer
+    const savedKey = localStorage.getItem('gemini_api_key');
+    if (savedKey && keyInput) keyInput.value = savedKey;
+
+    const savedOffer = localStorage.getItem('gemini_user_offer');
+    if (savedOffer && offerInput) offerInput.value = savedOffer;
+
+    const savedEnabled = localStorage.getItem('gemini_enabled') !== 'false';
+    if (chk) chk.checked = savedEnabled;
+    if (panel) panel.style.display = savedEnabled ? 'block' : 'none';
+
+    if (chk) {
+        chk.addEventListener('change', () => {
+            toggleGeminiPanel(chk.checked);
+        });
+    }
+
+    if (keyInput) {
+        keyInput.addEventListener('input', () => {
+            localStorage.setItem('gemini_api_key', keyInput.value.trim());
+        });
+    }
+
+    if (offerInput) {
+        offerInput.addEventListener('input', () => {
+            localStorage.setItem('gemini_user_offer', offerInput.value.trim());
+        });
+    }
+
+    if (btnTest) {
+        btnTest.addEventListener('click', () => {
+            const key = keyInput?.value?.trim();
+            if (!key) {
+                if (testResult) testResult.innerHTML = '<span class="text-danger">Please enter your Gemini API Key first.</span>';
+                return;
+            }
+            if (testResult) testResult.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-accent"></i> Verifying key with Google Gemini...';
+            fetch('/api/gemini/test', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ api_key: key })
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    testResult.innerHTML = `<span class="text-success"><i class="fa-solid fa-circle-check"></i> ${data.message}</span>`;
+                } else {
+                    testResult.innerHTML = `<span class="text-danger"><i class="fa-solid fa-circle-xmark"></i> ${data.message}</span>`;
+                }
+            })
+            .catch(err => {
+                testResult.innerHTML = `<span class="text-danger">Connection error: ${err}</span>`;
+            });
+        });
+    }
+
+    if (btnPreview) {
+        btnPreview.addEventListener('click', () => {
+            const key = keyInput?.value?.trim();
+            if (!key) {
+                alert('Please enter your Gemini API Key first!');
+                return;
+            }
+            btnPreview.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating tailored AI pitch...';
+            fetch('/api/gemini/generate-sample', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    api_key: key,
+                    sender_offer: offerInput?.value || '',
+                    channel: 'whatsapp'
+                })
+            })
+            .then(r => r.json())
+            .then(data => {
+                btnPreview.innerHTML = '<i class="fa-solid fa-sparkles text-warning"></i> Generate AI Preview for Row #1';
+                if (data.success) {
+                    const waBox = document.getElementById('waMessageText');
+                    if (waBox) waBox.value = data.result;
+                    const mockup = document.getElementById('mockupMessageText');
+                    if (mockup) mockup.innerText = data.result;
+                    alert('✨ Gemini successfully crafted a custom pitch for ' + (data.contact['Agency / Company Name'] || data.contact['Name'] || 'your contact') + '! Look at the live phone screen on the right.');
+                } else {
+                    alert('Gemini Error: ' + data.error);
+                }
+            })
+            .catch(err => {
+                btnPreview.innerHTML = '<i class="fa-solid fa-sparkles text-warning"></i> Generate AI Preview for Row #1';
+                alert('Failed to generate preview: ' + err);
+            });
+        });
+    }
+}
 
 // 1. TABS NAVIGATION
 function initTabs() {
