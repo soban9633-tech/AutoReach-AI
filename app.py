@@ -11,8 +11,15 @@ import email_bot
 from whatsapp_bot import WhatsAppBot
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = os.path.abspath('./uploads')
-app.config['REPORTS_FOLDER'] = os.path.abspath('./reports')
+
+is_vercel = bool(os.environ.get('VERCEL'))
+if is_vercel:
+    app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
+    app.config['REPORTS_FOLDER'] = '/tmp/reports'
+else:
+    app.config['UPLOAD_FOLDER'] = os.path.abspath('./uploads')
+    app.config['REPORTS_FOLDER'] = os.path.abspath('./reports')
+
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB max
 
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
